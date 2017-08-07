@@ -17,3 +17,15 @@
 14. Ejercicio #5 - Interactuando con APIs (10 mins)
 15. Despliegue de aplicaciones
 16. Cierre
+
+# Deploy
+1. `npm install -D gh-pages` o `yarn add gh-pages -D`
+2. Crear un repositorio en github
+3. Agregar `"homepage": "https://tuusuariodegithub.github.io/el-nombre-del-repositorio`
+4. Actualizar su `package.json` con:
+```json
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build",
+```
+5. Correr `npm run deploy` o `yarn deploy`
+6. Ir a `https://tuusuariodegithub.github.io/el-nombre-del-repositorio`

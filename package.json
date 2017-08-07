@@ -10,10 +10,15 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  },
+  "homepage": "https://alejandronanez.github.io/workshop-101"
 }
