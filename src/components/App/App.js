@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 import SeriesCard from 'components/SeriesCard/SeriesCard';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -17,15 +17,17 @@ class App extends React.Component {
     }
 
     getSeriesDataFromAPI = () => {
-        /**
-         * Exercise
-         *
-         * Make a GET request to the endpoint http://api.tvmaze.com/search/shows?q=
-         * using axios.get https://github.com/mzabriskie/axios#example
-         * and use the result to update state.series
-         *
-         */
-        console.log('Querying data...', this.state);
+        axios.get(`http://api.tvmaze.com/search/shows?q=${this.state.query}`)
+            .then(result => {
+                this.setState({
+                    series: result.data
+                });
+            })
+            .catch(err => {
+                this.setState({
+                    series: []
+                });
+            });
     }
 
     handleSearchFormSubmit = (searchFormValue) => {
@@ -35,40 +37,37 @@ class App extends React.Component {
     }
 
     renderSeries() {
-        const series = [
-            {
-                id: 1,
-                image: 'http://static.tvmaze.com/uploads/images/medium_portrait/0/2400.jpg',
-                title: 'Breaking Bad',
-                status: 'Ended',
-                description: 'Breaking Bad description...'
-            },
-            {
-                id: 2,
-                image: 'http://static.tvmaze.com/uploads/images/medium_portrait/120/301311.jpg',
-                title: 'Ozark',
-                status: 'Running',
-                description: 'Ozark description...'
-            },
-            {
-                id: 3,
-                image: 'http://static.tvmaze.com/uploads/images/medium_portrait/99/249188.jpg',
-                title: 'American Gods',
-                status: 'Running',
-                description: 'American Gods description...'
-            }
-        ];
+        console.log(this.state.series);
 
-        return series.map((serie) => {
+        return this.state.series.map((serie) => {
+            /**
+             * Exercise
+             *
+             * Now you should have all series inside this.state.series
+             * In this .map we're iterating over each one of the series that the API returned
+             *
+             * Your task consist on pass the right props to the <SeriesCard /> component
+             *
+             * If you need to know what's the structure for each serie, you can do
+             * console.log(serie);
+             *
+             * You have 15 minutes to do it
+             */
+
             return (
-                <SeriesCard
-                    key={serie.id}
-                    image={serie.image}
-                    title={serie.title}
-                    status={serie.status}
-                    description={serie.description}
-                />
+                <div>Fix me</div>
             );
+
+            // Remove the comments for this return
+            // return (
+            //     <SeriesCard
+            //         key={???}
+            //         image={????}
+            //         title={???}
+            //         status={???}
+            //         description={???}
+            //     />
+            // );
         });
     }
 
