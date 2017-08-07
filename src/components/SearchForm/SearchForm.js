@@ -28,11 +28,11 @@ class SearchForm extends React.Component {
     }
 
     render() {
+        const buttonClasses = this.props.loading ? 'button is-primary is-loading' : 'button is-primary';
+
         return (
             <form onSubmit={this.handleOnSubmit}>
-                <div
-                    className="control is-expanded"
-                >
+                <div className="control is-expanded">
                     <input
                         className="input"
                         type="search"
@@ -41,11 +41,9 @@ class SearchForm extends React.Component {
                         onChange={this.handleOnChange}
                     />
                 </div>
-                <div
-                    className="control"
-                >
+                <div className="control">
                     <button
-                        className="button is-primary"
+                        className={buttonClasses}
                         type="submit"
                     >
                         Search Series
@@ -55,5 +53,9 @@ class SearchForm extends React.Component {
         )
     }
 }
+
+SearchForm.defaulProps = {
+    loading: false
+};
 
 export default SearchForm;

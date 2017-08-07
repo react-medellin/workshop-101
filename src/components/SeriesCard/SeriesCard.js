@@ -31,9 +31,7 @@ function SeriesCard(props) {
                             {status}
                         </span>
                     </div>
-                    <div>
-                        {description}
-                    </div>
+                    <div dangerouslySetInnerHTML={description}></div>
                 </div>
             </div>
         </div>

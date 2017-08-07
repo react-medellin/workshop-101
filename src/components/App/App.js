@@ -12,7 +12,8 @@ class App extends React.Component {
 
         this.state = {
             query: '',
-            series: []
+            series: [],
+            loading: false
         };
     }
 
@@ -20,70 +21,72 @@ class App extends React.Component {
         axios.get(`http://api.tvmaze.com/search/shows?q=${this.state.query}`)
             .then(result => {
                 this.setState({
-                    series: result.data
+                    series: result.data,
+                    loading: false
                 });
             })
             .catch(err => {
                 this.setState({
-                    series: []
+                    series: [],
+                    loading: false
                 });
             });
     }
 
     handleSearchFormSubmit = (searchFormValue) => {
         this.setState({
-            query: searchFormValue
+            query: searchFormValue,
+            loading: true,
+            series: []
         }, this.getSeriesDataFromAPI);
     }
 
     renderSeries() {
-        console.log(this.state.series);
-
         return this.state.series.map((serie) => {
-            /**
-             * Exercise
-             *
-             * Now you should have all series inside this.state.series
-             * In this .map we're iterating over each one of the series that the API returned
-             *
-             * Your task consist on pass the right props to the <SeriesCard /> component
-             *
-             * If you need to know what's the structure for each serie, you can do
-             * console.log(serie);
-             *
-             * You have 15 minutes to do it
-             */
+            const show = serie.show;
 
             return (
-                <div>Fix me</div>
+                <div
+                    className="column is-4"
+                    key={show.id}
+                >
+                    <SeriesCard
+                        image={show.image.medium}
+                        title={show.name}
+                        status={show.status}
+                        description={{
+                            __html: show.summary
+                        }}
+                    />
+                </div>
             );
-
-            // Remove the comments for this return
-            // return (
-            //     <SeriesCard
-            //         key={???}
-            //         image={????}
-            //         title={???}
-            //         status={???}
-            //         description={???}
-            //     />
-            // );
         });
     }
 
     render() {
         return (
-            <div>
-                <SearchForm
-                    onSubmit={this.handleSearchFormSubmit}
-                />
-                {
-                    !!this.state.query &&
-                    <div>
-                        You searched for: {this.state.query}
+            <div className="section">
+                <div className="container">
+                    <div className="columns is-centered">
+                        <div className="column is-6">
+                            <SearchForm
+                                onSubmit={this.handleSearchFormSubmit}
+                                loading={this.state.loading}
+                            />
+                            {
+                                !!this.state.query &&
+                                <div>
+                                    You searched for: {this.state.query}
+                                </div>
+                            }
+                        </div>
                     </div>
-                }
-                {this.renderSeries()}
+                </div>
+                <div className="container">
+                    <div className="columns is-multiline">
+                        {this.renderSeries()}
+                    </div>
+                </div>
             </div>
         );
     }
