@@ -13,7 +13,8 @@ class App extends React.Component {
         this.state = {
             query: '',
             series: [],
-            loading: false
+            loading: false,
+            error: ''
         };
     }
 
@@ -23,13 +24,15 @@ class App extends React.Component {
             .then(result => {
                 this.setState({
                     series: result.data,
-                    loading: false
+                    loading: false,
+                    error: ''
                 });
             })
             .catch(err => {
                 this.setState({
                     series: [],
-                    loading: false
+                    loading: false,
+                    error: err.message
                 });
             });
     }
@@ -38,7 +41,8 @@ class App extends React.Component {
         this.setState({
             query: searchFormValue,
             loading: true,
-            series: []
+            series: [],
+            error: ''
         }, this.getSeriesDataFromAPI);
     }
 
@@ -70,6 +74,14 @@ class App extends React.Component {
                 <div className="container">
                     <div className="columns is-centered">
                         <div className="column is-6">
+                            {
+                                !!this.state.error.length &&
+                                <article className="message is-danger">
+                                    <div className="message-body">
+                                        {this.state.error}
+                                    </div>
+                                </article>
+                            }
                             <SearchForm
                                 onSubmit={this.handleSearchFormSubmit}
                                 loading={this.state.loading}
