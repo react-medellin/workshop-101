@@ -5,26 +5,26 @@ class SearchForm extends React.Component {
         super();
 
         this.state = {
-            searchQuery: '',
-            unTouchedValue: ''
+            searchQuery: ''
         };
     }
 
     handleOnChange = (event) => {
         this.setState({
             searchQuery: event.target.value
-        }, () => {
-            console.log('New State: ', this.state);
         });
     }
 
     handleOnSubmit = (event) => {
-        /**
-         * Exercise:
-         *
-         * 1. Stop the form submit
-         * 2. Call onSubmit prop that has been passed to this component
-         */
+        event.preventDefault();
+
+        // Call function props.onSubmit with the search input value
+        this.props.onSubmit(this.state.searchQuery);
+
+        // Reset state.searchQuery to ''
+        this.setState({
+            searchQuery: ''
+        });
     }
 
     render() {
@@ -37,6 +37,7 @@ class SearchForm extends React.Component {
                         className="input"
                         type="search"
                         placeholder="Find an user"
+                        value={this.state.searchQuery}
                         onChange={this.handleOnChange}
                     />
                 </div>

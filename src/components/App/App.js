@@ -1,4 +1,5 @@
 import React from 'react';
+// import axios from 'axios';
 
 import SeriesCard from 'components/SeriesCard/SeriesCard';
 import SearchForm from 'components/SearchForm/SearchForm';
@@ -10,19 +11,27 @@ class App extends React.Component {
         super();
 
         this.state = {
-            query: ''
+            query: '',
+            series: []
         };
     }
 
-    handleSearchFormSubmit = (searchFormValue) => {
+    getSeriesDataFromAPI = () => {
         /**
-         * Exercise:
+         * Exercise
          *
-         * 3. Update the local state.query with the value from
-         * searchFromValue
+         * Make a GET request to the endpoint http://api.tvmaze.com/search/shows?q=
+         * using axios.get https://github.com/mzabriskie/axios#example
+         * and use the result to update state.series
          *
-         * You have 10 minutes
          */
+        console.log('Querying data...', this.state);
+    }
+
+    handleSearchFormSubmit = (searchFormValue) => {
+        this.setState({
+            query: searchFormValue
+        }, this.getSeriesDataFromAPI);
     }
 
     renderSeries() {
