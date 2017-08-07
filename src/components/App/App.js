@@ -1,15 +1,29 @@
 import React from 'react';
 
 import SeriesCard from 'components/SeriesCard/SeriesCard';
+import SearchForm from 'components/SearchForm/SearchForm';
 
-/**
- * Exercise.
- * Print the two different series
- *
- * You have 10 minutes to complete this exercise
- */
 
 class App extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            query: ''
+        };
+    }
+
+    handleSearchFormSubmit = (searchFormValue) => {
+        /**
+         * Exercise:
+         *
+         * 3. Update the local state.query with the value from
+         * searchFromValue
+         *
+         * You have 10 minutes
+         */
+    }
 
     renderSeries() {
         const series = [
@@ -39,10 +53,11 @@ class App extends React.Component {
         return series.map((serie) => {
             return (
                 <SeriesCard
-                    image="http://static.tvmaze.com/uploads/images/medium_portrait/0/2400.jpg"
-                    title="Breaking bad"
-                    status="Ended"
-                    description="Breaking bad description"
+                    key={serie.id}
+                    image={serie.image}
+                    title={serie.title}
+                    status={serie.status}
+                    description={serie.description}
                 />
             );
         });
@@ -51,7 +66,16 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {/* Print all series in here */}
+                <SearchForm
+                    onSubmit={this.handleSearchFormSubmit}
+                />
+                {
+                    !!this.state.query &&
+                    <div>
+                        You searched for: {this.state.query}
+                    </div>
+                }
+                {this.renderSeries()}
             </div>
         );
     }
