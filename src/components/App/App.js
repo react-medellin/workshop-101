@@ -18,7 +18,8 @@ class App extends React.Component {
     }
 
     getSeriesDataFromAPI = () => {
-        axios.get(`http://api.tvmaze.com/search/shows?q=${this.state.query}`)
+        // Adding https://cors-anywhere.herokuapp.com/ to byPass https only restriction on github pages
+        axios.get(`https://cors-anywhere.herokuapp.com/http://api.tvmaze.com/search/shows?q=${this.state.query}`)
             .then(result => {
                 this.setState({
                     series: result.data,
