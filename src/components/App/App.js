@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SeriesCard from 'components/SeriesCard/SeriesCard';
-import SearchForm from 'components/SearchForm/SearchForm';
+import SeriesCard from '../SeriesCard/SeriesCard';
+import SearchForm from '../SearchForm/SearchForm';
 
 
 class App extends React.Component {
