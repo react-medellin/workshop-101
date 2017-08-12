@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SeriesCard from 'components/SeriesCard/SeriesCard';
+import SeriesCard from '../SeriesCard/SeriesCard';
 
 /**
  * Exercise.
@@ -39,6 +39,7 @@ class App extends React.Component {
         return series.map((serie) => {
             return (
                 <SeriesCard
+                    key={serie.id}
                     image="http://static.tvmaze.com/uploads/images/medium_portrait/0/2400.jpg"
                     title="Breaking bad"
                     status="Ended"
@@ -51,7 +52,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {/* Print all series in here */}
+                {this.renderSeries()}
             </div>
         );
     }
